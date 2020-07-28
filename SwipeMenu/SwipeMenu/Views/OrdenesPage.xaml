@@ -14,7 +14,6 @@
         <!-- Date description-->
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Monday, 5th&#10;April" Margin="0,-50,0,0" TextColor="#535257" FontAttributes="Bold" FontSize="45" Padding="10,0,0,0"/>
 
-        <!-- Shedule list structure-->
         <CollectionView ItemsSource="{Binding Ordenes}"
                                  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
                                  VerticalScrollBarVisibility="Never"
