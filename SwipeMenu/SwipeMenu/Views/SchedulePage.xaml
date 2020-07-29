@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalendarUI.Views.SchedulePage"
+             BackgroundColor="#f3f4f6">
+    <ContentPage.Content>
+
+        <StackLayout Padding="25,0,25,0">
+            <Image HorizontalOptions="EndAndExpand" Source="Corner" HeightRequest="50"/>
+            <CollectionView ItemsSource="{Binding Ordenes}"
+                            x:Name="lista"
+                            SelectionChangedCommand="{Binding SelectOrdenCommand}"
+                           SelectionChangedCommandParameter="{Binding Source={x:Reference lista}, Path=SelectedItem}"
+                            VerticalScrollBarVisibility="Never"
+                            SelectionMode="Single"
+                            VerticalOptions="Start">
+                     <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Frame  CornerRadius="25" HasShadow="False" Margin="5,0,5,10" >
+                                <StackLayout>
+                                    <Label Text="{Binding OrdIdcliente}" FontAttributes="Bold" TextColor="#535257" FontSize="18"/>
+                                    <Label Text="{Binding OrdDireccion}" TextColor="Silver" FontSize="18"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                        
+                            </DataTemplate>
+                     </CollectionView.ItemTemplate>
+               </CollectionView> 
+        </StackLayout> 
+    </ContentPage.Content>
+</ContentPage>
+

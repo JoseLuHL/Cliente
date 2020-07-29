@@ -1,7 +1,7 @@
 ﻿
+using AgendaApp;
 using MvvmHelpers;
 using SwipeMenu.Models;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,10 +16,18 @@ namespace SwipeMenu.ViewModel
 
         public MainViewModel()
         {
-            _ = GetOrdenesAsync();
+            
         }
 
         public ObservableCollection<Menu> MyMenu => GetMenus();
+        public OrdenModelo OrdenSelect { get; set; }
+        public ICommand SelectOrdenCommand => new Command<OrdenModelo> (async (OrdenModelo modelo) =>
+       {
+           OrdenSelect = modelo;
+           await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenDetalle ());
+           await Application.Current.MainPage.DisplayAlert("", modelo.OrdId.ToString(), "OK");
+
+       });
 
         private ObservableCollection<Menu> GetMenus()
         {
@@ -39,7 +47,15 @@ namespace SwipeMenu.ViewModel
 
         public ICommand OrdenesCommand => new Xamarin.Forms.Command(async () =>
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new OrdenesPage());
+            try
+            {
+                await GetOrdenesAsync();
+                await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenesPage { BindingContext = this });
+            }
+            catch (System.Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("", ex.ToString(), "OK");
+            }
         });
 
         public ObservableCollection<OrdenModelo> Ordenes { get; set; }
@@ -47,7 +63,7 @@ namespace SwipeMenu.ViewModel
         {
             IsBusy = true;
             Ordenes = await DataService.GetOrdenModelosAsync();
-            IsBusy = true;
+            IsBusy = false;
         }
 
     }

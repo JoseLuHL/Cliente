@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgendaApp;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,7 @@ namespace SwipeMenu
             InitializeComponent();
             Device.SetFlags(new[] { "SwipeView_Experimental" });
             MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage(new OrdenesPage());
         }
 
         protected override void OnStart()

@@ -13,17 +13,29 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1187-pre2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="4.7.0.813-pre2" />
-    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.0.1.701-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\OrdenesPage.xaml.cs">
+      <DependentUpon>OrdenesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\OrdenesPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrdenDetalle.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PinPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SchedulePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
