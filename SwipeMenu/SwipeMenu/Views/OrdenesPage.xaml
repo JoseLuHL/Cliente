@@ -61,7 +61,7 @@
                          ItemsSource="{Binding Ordenes}"
                          SelectionChangedCommand="{Binding SelectOrdenCommand}"
                          SelectionChangedCommandParameter="{Binding Source={x:Reference lista}, Path=SelectedItem}"
-                        
+                        SelectionChanged="CollectionView_SelectionChanged"
                          SelectionMode="Single" >
             <!--<CollectionView.Header> SelectionChanged="CollectionView_SelectionChanged"
                 <Label Text="Agenda" TextColor="Black" FontSize="18"/>
@@ -89,18 +89,19 @@
                                             <ColumnDefinition Width="3*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                        <Label Text="{Binding OrdFecha, StringFormat='{0:dd}'}" TextColor="Black" FontSize="27" 
+                                    <Label Text="{Binding OrdFecha, StringFormat='{0:dd}'}" TextColor="Black" FontSize="27" 
                                                    HorizontalOptions="Center"/>
-                                        <Label Text="{Binding OrdFecha, StringFormat='{0:MMMM}'}" TextColor="Black" FontSize="10" 
+                                    <Label Text="{Binding OrdFecha, StringFormat='{0:MMMM}'}" TextColor="Black" FontSize="10" 
                                                    HorizontalOptions="Center" Margin="0,-10,0,0"/>
                                         </StackLayout>
                                         <BoxView Grid.Column="1" BackgroundColor="#F2F4F8" WidthRequest="1" HorizontalOptions="Start" 
                                                  VerticalOptions="FillAndExpand"/>
                                         <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="20">
-                                        <Label Text="{Binding OrdIdcliente}" TextColor="Black" FontSize="15"/>
-                                        <Label Text="{Binding OrdDireccion}" TextColor="#2F3246" FontSize="12" Margin="0,-10,0,0"/>
+                                    <Label Text="{Binding OrdIdclienteNavigation.NombreCompleto}" TextColor="Black" FontSize="15"/>
+                                    <Label Text="{Binding OrdDireccion}" TextColor="#2F3246" FontSize="12" Margin="0,-10,0,0"/>
                                         </StackLayout>
                                     </Grid>
+                            
                                 <!--</Expander.Header>-->
                                 <!--<Grid HorizontalOptions="FillAndExpand">
                                     <Grid.ColumnDefinitions>

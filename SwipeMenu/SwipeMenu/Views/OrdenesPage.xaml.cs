@@ -18,9 +18,25 @@ namespace AgendaApp
         public OrdenesPage()
         {
             InitializeComponent();
+            
             //this.BindingContext = this;
         }
-
+        protected override void OnAppearing()
+        {
+            try
+            {
+                if (lista.SelectedItem != null)
+                    lista.SelectedItem = 0;
+                //lista.SelectedItems = null;
+                base.OnAppearing();
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("",ex.Message,"OK");
+                throw;
+            }
+           
+        }
         public ObservableCollection<Agenda> MyAgenda { get => GetAgenda(); }
 
         private ObservableCollection<Agenda> GetAgenda()
@@ -49,8 +65,11 @@ namespace AgendaApp
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var MyAgenda = e.CurrentSelection[0] as OrdenModelo;
-            Navigation.PushModalAsync(new OrdenDetalle { BindingContext = MyAgenda });
+            //lista.SelectedItem = null;
+            //lista.SelectedItems = null;
+
+            //var MyAgenda = e.CurrentSelection[0] as OrdenModelo;
+            //Navigation.PushModalAsync(new OrdenDetalle { BindingContext = MyAgenda });
         }
     }
 

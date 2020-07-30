@@ -16,16 +16,16 @@ namespace WorkingWithMaps
         public PinPage()
         {
             InitializeComponent();
-            map.IsShowingUser = false;
-            Pin boardwalkPin = new Pin
-            {
-                Position = new Position(5.687629, -76.659698),
-                Label = "Chocó",
-                Address = "Quibdo",
-                Type = PinType.Place
-            };
+            map.IsShowingUser = true;
+            //Pin boardwalkPin = new Pin
+            //{
+            //    Position = new Position(5.687629, -76.659698),
+            //    Label = "Chocó",
+            //    Address = "Quibdo",
+            //    Type = PinType.Place
+            //};
 
-            map.Pins.Add(boardwalkPin);
+            //map.Pins.Add(boardwalkPin);
 
         }
 
@@ -72,36 +72,35 @@ namespace WorkingWithMaps
                     Position = new Position(item.OrdLatitud, item.OrdLongitud),
                     BindingContext = item,
                     AutomationId = item.OrdId.ToString(),
-                    Label = item.OrdIdcliente,
+                    Label = item.OrdIdclienteNavigation.NombreCompleto,
                     Address = item.OrdDireccion,
                     Type = PinType.Place
                 };
 
-                listPin.MarkerClicked += OnMarkerClickedAsync;
+                //listPin.MarkerClicked += OnMarkerClickedAsync;
                 listPin.InfoWindowClicked += OnInfoWindowClickedAsync;
                 map.Pins.Add(listPin);
             }
 
+           //boardwalkPin.MarkerClicked += OnMarkerClickedAsync;
 
-            boardwalkPin.MarkerClicked += OnMarkerClickedAsync;
 
+            //Pin wharfPin = new Pin
+            //{
+            //    Position = new Position(5.6845709, -76.6540463),
+            //    Label = "Chocó",
+            //    Address = "Quibdo",
+            //    Type = PinType.Place
+            //};
 
-            Pin wharfPin = new Pin
-            {
-                Position = new Position(5.6845709, -76.6540463),
-                Label = "Chocó",
-                Address = "Quibdo",
-                Type = PinType.Place
-            };
-
-            wharfPin = new Pin
-            {
-                Position = new Position(5.68628372017091, -76.66052389815435),
-                Label = "Chocó",
-                Address = "Quibdo",
-                Type = PinType.Place
-            };
-            wharfPin.InfoWindowClicked += OnInfoWindowClickedAsync;
+            ////wharfPin = new Pin
+            ////{
+            ////    Position = new Position(5.68628372017091, -76.66052389815435),
+            ////    Label = "Chocó",
+            ////    Address = "Quibdo",
+            ////    Type = PinType.Place
+            ////};
+            //wharfPin.InfoWindowClicked += OnInfoWindowClickedAsync;
 
 
             //map.Pins.Add(wharfPin);

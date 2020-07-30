@@ -14,11 +14,11 @@ namespace XFFurniture.Service
     {
         static HttpClient Http;
 
-        public static async Task<ObservableCollection<OrdenModelo>> GetOrdenModelosAsync()
+        public static async Task<ObservableCollection<OrdenModelo>> GetOrdenModelosAsync(string url)
         {
             var respuesta = new ObservableCollection<OrdenModelo>();
             Http = new HttpClient();
-            var peticion = await Http.GetAsync(UrlModelo.odenes);
+            var peticion = await Http.GetAsync(url);
             if (peticion.IsSuccessStatusCode)
             {
                 var contenido = await peticion.Content.ReadAsStringAsync();
@@ -29,6 +29,55 @@ namespace XFFurniture.Service
                 respuesta = null;
             return respuesta;
         }
+
+        public static async Task<ObservableCollection<ClienteModelo>> GetClientesAsync()
+        {
+            var respuesta = new ObservableCollection<ClienteModelo>();
+            Http = new HttpClient();
+            var peticion = await Http.GetAsync(UrlModelo.cliente);
+            if (peticion.IsSuccessStatusCode)
+            {
+                var contenido = await peticion.Content.ReadAsStringAsync();
+                var datos = JsonConvert.DeserializeObject<ObservableCollection<ClienteModelo>>(contenido);
+                respuesta = datos;
+            }
+            else
+                respuesta = null;
+            return respuesta;
+        }
+
+        public static async Task<ObservableCollection<TiendaModelo>> GetTiendasAsync(string urlTienda)
+        {
+            var respuesta = new ObservableCollection<TiendaModelo>();
+            Http = new HttpClient();
+            var peticion = await Http.GetAsync(urlTienda);
+            if (peticion.IsSuccessStatusCode)
+            {
+                var contenido = await peticion.Content.ReadAsStringAsync();
+                var datos = JsonConvert.DeserializeObject<ObservableCollection<TiendaModelo>>(contenido);
+                respuesta = datos;
+            }
+            else
+                respuesta = null;
+            return respuesta;
+        }
+        
+        public static async Task<TiendaModelo> GetTiendasOneAsync(string urlTienda)
+        {
+            var respuesta = new TiendaModelo();
+            Http = new HttpClient();
+            var peticion = await Http.GetAsync(urlTienda);
+            if (peticion.IsSuccessStatusCode)
+            {
+                var contenido = await peticion.Content.ReadAsStringAsync();
+                var datos = JsonConvert.DeserializeObject<TiendaModelo>(contenido);
+                respuesta = datos;
+            }
+            else
+                respuesta = null;
+            return respuesta;
+        }
+
 
     }
 }

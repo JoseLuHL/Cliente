@@ -6,8 +6,10 @@ namespace SwipeMenu.Models
 {
    public class Ordendetalle
     {
+
+
         public int DetordId { get; set; }
-        public string DetordIdproducto { get; set; }
+        public int? DetordIdproducto { get; set; }
         public int? DetordOrdennumero { get; set; }
         public string DetordPrecio { get; set; }
         public string DetordCantidad { get; set; }
@@ -16,7 +18,7 @@ namespace SwipeMenu.Models
         public string DetordTamano { get; set; }
         public string DetordColor { get; set; }
         public string DetordFechaenvio { get; set; }
-
+        public virtual ProductoModelo DetordIdproductoNavigation { get; set; }
         public virtual OrdenModelo DetordOrdennumeroNavigation { get; set; }
     }
 }

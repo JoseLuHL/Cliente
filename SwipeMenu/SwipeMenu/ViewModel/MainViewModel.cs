@@ -2,11 +2,13 @@
 using AgendaApp;
 using MvvmHelpers;
 using SwipeMenu.Models;
+using SwipeMenu.Service;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WorkingWithMaps;
 using Xamarin.Forms;
+using XFFurniture.Models;
 using XFFurniture.Service;
 
 namespace SwipeMenu.ViewModel
@@ -16,18 +18,36 @@ namespace SwipeMenu.ViewModel
 
         public MainViewModel()
         {
-            
+
         }
 
         public ObservableCollection<Menu> MyMenu => GetMenus();
-        public OrdenModelo OrdenSelect { get; set; }
-        public ICommand SelectOrdenCommand => new Command<OrdenModelo> (async (OrdenModelo modelo) =>
-       {
-           OrdenSelect = modelo;
-           await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenDetalle ());
-           await Application.Current.MainPage.DisplayAlert("", modelo.OrdId.ToString(), "OK");
+        //public OrdenModelo OrdenSelect { get; set; }
+        private OrdenModelo ordenSelect;
 
-       });
+        public OrdenModelo OrdenSelect
+        {
+            get => ordenSelect;
+            set => SetProperty(ref ordenSelect, value);
+        }
+
+        private ObservableCollection<Ordendetalle> ordenDetalle;
+
+        public ObservableCollection<Ordendetalle> OrdenDetalle
+        {
+            get => ordenDetalle;
+            set => SetProperty(ref ordenDetalle, value);
+        }
+
+        public ICommand SelectOrdenCommand => new Command<OrdenModelo>(async (OrdenModelo modelo) =>
+      {
+          OrdenSelect = modelo;
+          OrdenDetalle = modelo.Ordendetalles;
+          modelo=null;
+          await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenDetalle { BindingContext = this });
+
+          //await Application.Current.MainPage.DisplayAlert("", modelo.OrdId.ToString(), "OK");
+      });
 
         private ObservableCollection<Menu> GetMenus()
         {
@@ -50,6 +70,12 @@ namespace SwipeMenu.ViewModel
             try
             {
                 await GetOrdenesAsync();
+                if (Ordenes.Count < 1)
+                {
+                    await Application.Current.MainPage.DisplayAlert("","No hay pedidos", "OK");
+                    return;
+                }
+
                 await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenesPage { BindingContext = this });
             }
             catch (System.Exception ex)
@@ -59,10 +85,33 @@ namespace SwipeMenu.ViewModel
         });
 
         public ObservableCollection<OrdenModelo> Ordenes { get; set; }
+
         async Task GetOrdenesAsync()
         {
             IsBusy = true;
-            Ordenes = await DataService.GetOrdenModelosAsync();
+            Ordenes = await DataService.GetOrdenModelosAsync($"{UrlModelo.odenesTienda}{UsuarioServicio.Tienda.TienId}");
+            IsBusy = false;
+        }
+
+        private ObservableCollection<ClienteModelo> clientes;
+
+        public ObservableCollection<ClienteModelo> Clientes
+        {
+            get => clientes;
+            set => SetProperty(ref clientes, value);
+        }
+
+        async Task GetClientesAsync()
+        {
+            IsBusy = true;
+            clientes = await DataService.GetClientesAsync();
+            IsBusy = false;
+        }
+
+        async Task GetTiendaAsync()
+        {
+            IsBusy = true;
+            clientes = await DataService.GetClientesAsync();
             IsBusy = false;
         }
 

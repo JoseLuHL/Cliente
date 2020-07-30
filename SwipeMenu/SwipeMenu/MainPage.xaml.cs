@@ -1,4 +1,5 @@
-﻿using SwipeMenu.ViewModel;
+﻿using SwipeMenu.Service;
+using SwipeMenu.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,15 @@ namespace SwipeMenu
         public  MainPage()
         {
             InitializeComponent();
-            this.BindingContext = new MainViewModel(); 
+            this.BindingContext = new MainViewModel();
+            //DisplayAlert("", UsuarioServicio.usuario, "OK");
+        }
+
+
+        protected override void OnAppearing()
+        {
+            nombre.Text = UsuarioServicio.Tienda.TienRazonsocial;
+            base.OnAppearing();
         }
 
         private async void OpenAnimation()

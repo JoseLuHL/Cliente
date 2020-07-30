@@ -17,8 +17,8 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackLayout Grid.Row="1" Padding="50,30">
-                            <Label Text="Hello Oludayo!" TextColor="Black" FontSize="22" FontAttributes="Bold"/>
-                            <Label Text="What would you like to do today?" TextColor="Black" FontSize="20"/>
+                            <Label x:Name="nombre" Text="Hello Oludayo!" TextColor="Black" FontSize="22" FontAttributes="Bold"/>
+                            <Label x:Name="descripcion" Text="¿Qué te gustaría hacer hoy?" TextColor="Black" FontSize="20"/>
                         </StackLayout>
                         <StackLayout Grid.Row="2" Spacing="20" Padding="50,0,50,0">
                             <pv:PancakeView Padding="20,10" CornerRadius="20,0,20,0" BackgroundColor="#0055FF" 
