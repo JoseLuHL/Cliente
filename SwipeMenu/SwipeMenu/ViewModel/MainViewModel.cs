@@ -46,10 +46,7 @@ namespace SwipeMenu.ViewModel
               OrdenDetalle = modelo.Ordendetalles;
               modelo = null;
               await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenDetalle { BindingContext = this });
-
-              //await Application.Current.MainPage.DisplayAlert("", modelo.OrdId.ToString(), "OK");
           });
-
         private ObservableCollection<Menu> GetMenus()
         {
             return new ObservableCollection<Menu>
@@ -61,12 +58,18 @@ namespace SwipeMenu.ViewModel
                 new Menu{ Name = "My Tasks", Icon = "tasks.png"},
             };
         }
-
         public ICommand ProductoCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new ProductoPage()); });
         public ICommand MapaCommand => new Command(async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
-        public ICommand MapaOrdenesCommand => new Command(execute: async ()=>{ await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
-        public ICommand DespacharOrdenesCommand => new Command(execute: async ()=>{ await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
-        public ICommand AvandonarOrdenesCommand => new Command(execute: async ()=>{ await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
+        public ICommand MapaOrdenesCommand => new Command( async () =>
+        {
+            var s = OrdenSelect;
+            await Application.Current.MainPage.Navigation.PushModalAsync(new PinPage
+            {
+                BindingContext = this
+            });
+        });
+        public ICommand DespacharOrdenesCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
+        public ICommand AvandonarOrdenesCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
         public ICommand OrdenesCommand => new Xamarin.Forms.Command(async () =>
         {
             try

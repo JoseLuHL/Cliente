@@ -40,7 +40,7 @@ namespace WorkingWithMaps
         {
             Pin boardwalkPin = new Pin();
             Pin listPin = new Pin();
-
+            var s = Ordens.OrdenSelect;
             if (Ordens.OrdenSelect != null)
             {
                 listPin = new Pin
