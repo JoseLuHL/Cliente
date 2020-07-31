@@ -3,6 +3,7 @@ using AgendaApp;
 using MvvmHelpers;
 using SwipeMenu.Models;
 using SwipeMenu.Service;
+using SwipeMenu.Views;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -40,14 +41,14 @@ namespace SwipeMenu.ViewModel
         }
 
         public ICommand SelectOrdenCommand => new Command<OrdenModelo>(async (OrdenModelo modelo) =>
-      {
-          OrdenSelect = modelo;
-          OrdenDetalle = modelo.Ordendetalles;
-          modelo=null;
-          await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenDetalle { BindingContext = this });
+          {
+              OrdenSelect = modelo;
+              OrdenDetalle = modelo.Ordendetalles;
+              modelo = null;
+              await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenDetalle { BindingContext = this });
 
-          //await Application.Current.MainPage.DisplayAlert("", modelo.OrdId.ToString(), "OK");
-      });
+              //await Application.Current.MainPage.DisplayAlert("", modelo.OrdId.ToString(), "OK");
+          });
 
         private ObservableCollection<Menu> GetMenus()
         {
@@ -60,11 +61,12 @@ namespace SwipeMenu.ViewModel
                 new Menu{ Name = "My Tasks", Icon = "tasks.png"},
             };
         }
-        public ICommand MapaCommand => new Xamarin.Forms.Command(async () =>
-        {
-            await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = Ordenes });
-        });
 
+        public ICommand ProductoCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new ProductoPage()); });
+        public ICommand MapaCommand => new Command(async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
+        public ICommand MapaOrdenesCommand => new Command(execute: async ()=>{ await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
+        public ICommand DespacharOrdenesCommand => new Command(execute: async ()=>{ await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
+        public ICommand AvandonarOrdenesCommand => new Command(execute: async ()=>{ await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
         public ICommand OrdenesCommand => new Xamarin.Forms.Command(async () =>
         {
             try
@@ -72,7 +74,7 @@ namespace SwipeMenu.ViewModel
                 await GetOrdenesAsync();
                 if (Ordenes.Count < 1)
                 {
-                    await Application.Current.MainPage.DisplayAlert("","No hay pedidos", "OK");
+                    await Application.Current.MainPage.DisplayAlert("", "No hay pedidos", "OK");
                     return;
                 }
 
@@ -84,7 +86,16 @@ namespace SwipeMenu.ViewModel
             }
         });
 
-        public ObservableCollection<OrdenModelo> Ordenes { get; set; }
+        public ICommand RefrescarOrdenesComman => new Command(execute: async () => { IsBusy = true; await GetOrdenesAsync(); IsBusy = false; });
+
+        //public ObservableCollection<OrdenModelo> Ordenes { get; set; }
+        private ObservableCollection<OrdenModelo> ordenes;
+
+        public ObservableCollection<OrdenModelo> Ordenes
+        {
+            get => ordenes;
+            set => SetProperty(ref ordenes, value);
+        }
 
         async Task GetOrdenesAsync()
         {

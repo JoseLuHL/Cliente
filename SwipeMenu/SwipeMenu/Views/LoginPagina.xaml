@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+              NavigationPage.HasNavigationBar="False"
              x:Class="SwipeMenu.Views.LoginPagina">
     <ContentPage.Content>
         <Grid Margin="16" 
@@ -12,6 +13,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -26,8 +28,13 @@
                        IsVisible="{Binding AreCredentialsInvalid}" 
                        TextColor="Red" />
             </StackLayout>
-            <Button Grid.Row="2" Text="Authenticate" Command="{Binding AuthenticateCommand}" />
-            <ActivityIndicator Grid.Row="3" IsRunning="{Binding IsBusy}"/>
+            <Button Grid.Row="2" Text="Authenticate" TextColor="White" BackgroundColor="{StaticResource fondo_boton}" Command="{Binding AuthenticateCommand}" />
+            <Label Grid.Row="4" Text="¿Aun no estas registrado?" TextColor="Blue" FontSize="Large">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PaginaRegistrarCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <ActivityIndicator Grid.Row="5" IsRunning="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

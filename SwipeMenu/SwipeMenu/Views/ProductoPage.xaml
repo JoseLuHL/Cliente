@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="SwipeMenu.Views.ProductoPage">
+        <ScrollView Margin="50">
+        <StackLayout>
+            <Label x:Name="nombre" Text="¿Que deseas hacer hoy?" TextColor="Black" FontSize="22" FontAttributes="Bold"/>
+            <StackLayout Margin="0,50,0,0" Spacing="3">
+                <pv:PancakeView Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <StackLayout Spacing="20" Orientation="Horizontal">
+                        <Image Source="edit.png" WidthRequest="13"/>
+                        <Label Text="Pedidos lista" TextColor="White" FontSize="14" VerticalOptions="Center"></Label>
+                    </StackLayout>
+                    <pv:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OrdenesCommand}"/>
+                    </pv:PancakeView.GestureRecognizers>
+                </pv:PancakeView>
+                
+                <pv:PancakeView Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <StackLayout Spacing="20" Orientation="Horizontal">
+                        <Image Source="edit.png" WidthRequest="13"/>
+                        <Label Text="Pedidos lista" TextColor="White" FontSize="14" VerticalOptions="Center"></Label>
+                    </StackLayout>
+                    <pv:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OrdenesCommand}"/>
+                    </pv:PancakeView.GestureRecognizers>
+                </pv:PancakeView>
+
+                <pv:PancakeView Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <StackLayout Spacing="20" Orientation="Horizontal">
+                        <Image Source="edit.png" WidthRequest="13"/>
+                        <Label Text="Pedidos lista" TextColor="White" FontSize="14" VerticalOptions="Center"></Label>
+                    </StackLayout>
+                    <pv:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OrdenesCommand}"/>
+                    </pv:PancakeView.GestureRecognizers>
+                </pv:PancakeView>
+            </StackLayout>
+            
+            <StackLayout Spacing="0">
+                <Label Text="Codigo" />
+                <Entry/>
+
+                <Label Text="Nombre del producto"/>
+                <Entry/>
+
+                <Label Text="Descripción (opcional)"/>
+                <Entry/>
+
+                <Label Text="Precio unitario"/>
+                <Entry/>
+
+                <Label Text="Cantidad"/>
+                <Entry/>
+
+                <Label Text="Stock minimo"/>
+                <Entry/>
+
+                <Label Text="Stock maximo"/>
+                <Entry/>
+
+                <Label Text="Foto"/>
+
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <ImageButton WidthRequest="50" BackgroundColor="Transparent" HeightRequest="50" Source="galeria"></ImageButton>
+                    <ImageButton  WidthRequest="50" HeightRequest="50" BackgroundColor="Transparent" Source="camara"></ImageButton>
+                </StackLayout>
+
+                <Image Source=""/>
+
+                <StackLayout Margin="0,20,0,0">
+                    <pv:PancakeView Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <StackLayout Spacing="20" Orientation="Horizontal">
+                            <Image Source="edit.png" WidthRequest="13"/>
+                            <Label Text="GUARDAR" TextColor="White" FontSize="14" VerticalOptions="Center"></Label>
+                        </StackLayout>
+                        <pv:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OrdenesCommand}"/>
+                        </pv:PancakeView.GestureRecognizers>
+                    </pv:PancakeView>
+
+                    <pv:PancakeView Margin="0,10,0,0" Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <StackLayout Spacing="20" Orientation="Horizontal">
+                            <Image Source="edit.png" WidthRequest="13"/>
+                            <Label Text="CANCELAR" TextColor="White" FontSize="14" VerticalOptions="Center"></Label>
+                        </StackLayout>
+                        <pv:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OrdenesCommand}"/>
+                        </pv:PancakeView.GestureRecognizers>
+                    </pv:PancakeView>
+                </StackLayout>
+                
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

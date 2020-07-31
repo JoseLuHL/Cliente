@@ -1,4 +1,5 @@
 ﻿using SwipeMenu.Models;
+using SwipeMenu.ViewModel;
 using System;
 using System.Collections.ObjectModel;
 using WorkingWithMaps.Modelo;
@@ -11,28 +12,19 @@ namespace WorkingWithMaps
     public partial class PinPage : ContentPage
     {
         //List<Pin> boardwalkPin;
-        ObservableCollection<OrdenModelo> Ordens => ((ObservableCollection<OrdenModelo>)BindingContext);
+        MainViewModel Ordens => ((MainViewModel)BindingContext);
+        //OrdenModelo OrdenSelect => ((OrdenModelo)BindingContext);
         Property property;
         public PinPage()
         {
             InitializeComponent();
             map.IsShowingUser = true;
-            //Pin boardwalkPin = new Pin
-            //{
-            //    Position = new Position(5.687629, -76.659698),
-            //    Label = "Chocó",
-            //    Address = "Quibdo",
-            //    Type = PinType.Place
-            //};
-
-            //map.Pins.Add(boardwalkPin);
 
         }
 
         public PinPage(Property property)
         {
             InitializeComponent();
-            //contexto.PropertyTypeList
             map.IsShowingUser = false;
             this.property = property;
 
@@ -40,70 +32,61 @@ namespace WorkingWithMaps
 
         protected override void OnAppearing()
         {
-            if (property != null)
-            {
-                Pin listPin = new Pin
-                {
-                    Position = new Position(property.Lat, property.Lng),
-                    AutomationId = property.Id,
-                    Label = property.Price,
-                    Address = property.Space,
-                    Type = PinType.Place
-                };
-                map.Pins.Add(listPin);
-
-            }
-            else
-                Cargar();
-
+            Cargar();
             base.OnAppearing();
         }
 
         public void Cargar()
         {
-            map.IsShowingUser = false;
             Pin boardwalkPin = new Pin();
             Pin listPin = new Pin();
-            if (Ordens!=null)
-            foreach (var item in Ordens)
+
+            if (Ordens.OrdenSelect != null)
             {
                 listPin = new Pin
                 {
-                    Position = new Position(item.OrdLatitud, item.OrdLongitud),
-                    BindingContext = item,
-                    AutomationId = item.OrdId.ToString(),
-                    Label = item.OrdIdclienteNavigation.NombreCompleto,
-                    Address = item.OrdDireccion,
+                    Position = new Position(Ordens.OrdenSelect.OrdLatitud, Ordens.OrdenSelect.OrdLongitud),
+                    BindingContext = Ordens.OrdenSelect,
+                    AutomationId = Ordens.OrdenSelect.OrdId.ToString(),
+                    Label = Ordens.OrdenSelect.OrdIdclienteNavigation.NombreCompleto,
+                    Address = Ordens.OrdenSelect.OrdDireccion,
                     Type = PinType.Place
                 };
-
                 //listPin.MarkerClicked += OnMarkerClickedAsync;
                 listPin.InfoWindowClicked += OnInfoWindowClickedAsync;
                 map.Pins.Add(listPin);
+                return;
             }
 
-           //boardwalkPin.MarkerClicked += OnMarkerClickedAsync;
 
 
-            //Pin wharfPin = new Pin
+            if (Ordens != null)
+                foreach (var item in Ordens.Ordenes)
+                {
+                    listPin = new Pin
+                    {
+                        Position = new Position(item.OrdLatitud, item.OrdLongitud),
+                        BindingContext = item,
+                        AutomationId = item.OrdId.ToString(),
+                        Label = item.OrdIdclienteNavigation.NombreCompleto,
+                        Address = item.OrdDireccion,
+                        Type = PinType.Place
+                    };
+
+                    //listPin.MarkerClicked += OnMarkerClickedAsync;
+                    listPin.InfoWindowClicked += OnInfoWindowClickedAsync;
+                    map.Pins.Add(listPin);
+                }
+
+            //boardwalkpin.markerclicked += onmarkerclickedasync;
+            //pin wharfpin = new pin
             //{
-            //    Position = new Position(5.6845709, -76.6540463),
-            //    Label = "Chocó",
-            //    Address = "Quibdo",
-            //    Type = PinType.Place
+            //    position = new position(5.6845709, -76.6540463),
+            //    label = "chocó",
+            //    address = "quibdo",
+            //    type = pintype.place
             //};
-
-            ////wharfPin = new Pin
-            ////{
-            ////    Position = new Position(5.68628372017091, -76.66052389815435),
-            ////    Label = "Chocó",
-            ////    Address = "Quibdo",
-            ////    Type = PinType.Place
-            ////};
-            //wharfPin.InfoWindowClicked += OnInfoWindowClickedAsync;
-
-
-            //map.Pins.Add(wharfPin);
+            //map.pins.add(wharfpin);
         }
         void OnButtonClicked(object sender, EventArgs e)
         {

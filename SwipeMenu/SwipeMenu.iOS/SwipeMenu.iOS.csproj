@@ -136,4 +136,10 @@
       <Name>SwipeMenu</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\camara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\galeria.png" />
+  </ItemGroup>
 </Project>

@@ -4,102 +4,119 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
+             BackgroundColor="WhiteSmoke"
              x:Class="AgendaApp.OrdenDetalle">
     <ContentPage.Content>
-        <Grid BackgroundColor="#F3F5F9"  RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid BackgroundColor="#455399"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <StackLayout  Margin="0,20,0,20" Spacing="0" HorizontalOptions="Center">
-                <Label TextColor="White" FontSize="18" HorizontalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                    <Span Text="{Binding OrdenSelect.OrdIdclienteNavigation.NombreCompleto}" FontSize="18" FontAttributes="Bold"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                    <Label Text="{Binding OrdenSelect.OrdIdclienteNavigation.ClieTelefono}" TextColor="White" FontSize="15" HorizontalTextAlignment="Center" Margin="0,0,0,0"/>
-                    <Label Text="{Binding OrdenSelect.OrdIdclienteNavigation.ClieDireccion}" TextColor="White" FontSize="15" HorizontalTextAlignment="Center" Margin="0,0,0,0"/>
-            </StackLayout>
-        </Grid>
-
-            <pv:PancakeView Grid.Row="1" HasShadow="True"   Margin="0,0,0,0" 
-                        HorizontalOptions="Center">
-            <Grid ColumnSpacing="0" HorizontalOptions="FillAndExpand">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <!--<ColumnDefinition Width="*"/>-->
-                </Grid.ColumnDefinitions>
+        <ScrollView>
+            <Grid BackgroundColor="#F3F5F9"  RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <BoxView Grid.RowSpan="2" WidthRequest="160" />
+                <Grid BackgroundColor="#455399"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout  Margin="0,20,0,20" Spacing="0" HorizontalOptions="Center">
+                        <Label TextColor="White" FontSize="18" HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="{Binding OrdenSelect.OrdIdclienteNavigation.NombreCompleto}" FontSize="18" FontAttributes="Bold"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Text="{Binding OrdenSelect.OrdIdclienteNavigation.ClieTelefono}" TextColor="White" FontSize="15" HorizontalTextAlignment="Center" Margin="0,0,0,0"/>
+                        <Label Text="{Binding OrdenSelect.OrdIdclienteNavigation.ClieDireccion}" TextColor="White" FontSize="15" HorizontalTextAlignment="Center" Margin="0,0,0,0"/>
+                    </StackLayout>
+                </Grid>
+                <pv:PancakeView Grid.Row="1" HasShadow="True"   Margin="0,0,0,0" 
+                        HorizontalOptions="Center">
+                    <Grid ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <BoxView Grid.RowSpan="2" WidthRequest="160" />
+                        <StackLayout Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding OrdenSelect.OrdTotalcompra}" TextColor="#455399" FontSize="36" HorizontalOptions="Center"/>
+                            <Label Text="{Binding OrdenSelect.OrdIdformapagoNavigation.MepDescripcion, StringFormat='{0:D}'}" FontAttributes="Bold" TextColor="#455399" FontSize="12" HorizontalOptions="Center" Margin="0,-10,0,0"/>
+                            <Label Text="{Binding OrdenSelect.OrdFecha, StringFormat='{0:D}'}" TextColor="#455399" FontSize="12" HorizontalOptions="Center" Margin="0,-10,0,0"/>
+                            <Label Text="{Binding OrdenSelect.OrdFecha, StringFormat='{0:HH:mm}'}" TextColor="#455399" FontSize="12" HorizontalOptions="Center" Margin="0,-10,0,0"/>
+                        </StackLayout>
+                    </Grid>
+                </pv:PancakeView>
 
-                <StackLayout Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label Text="{Binding OrdenSelect.OrdTotalcompra}" TextColor="#455399" FontSize="36" HorizontalOptions="Center"/>
-                        <Label Text="{Binding OrdenSelect.OrdFecha, StringFormat='{0:D}'}" TextColor="#455399" FontSize="12" HorizontalOptions="Center" Margin="0,-10,0,0"/>
-                        <Label Text="{Binding OrdenSelect.OrdFecha, StringFormat='{0:HH:mm}'}" TextColor="#455399" FontSize="12" HorizontalOptions="Center" Margin="0,-10,0,0"/>
-                </StackLayout>
-
-                <!--<pv:PancakeView Grid.Row="1" HeightRequest="7" WidthRequest="7" BorderThickness="2" 
-                                BorderColor="#F1F3F7" CornerRadius="3.5" HorizontalOptions="Center" 
-                                VerticalOptions="Center" Margin="7"/>-->
-                
-            </Grid>
-        </pv:PancakeView>
-
-            <CollectionView Grid.Row="2" Margin="25" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                <CollectionView  Grid.Row="2" Margin="25"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                         x:Name="lista" ItemsSource="{Binding OrdenDetalle}">
-                <!--<CollectionView.Header>
-                <Label Text="Agenda" TextColor="Black" FontSize="18"/>
-            </CollectionView.Header>-->
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <pv:PancakeView HasShadow="True" BackgroundColor="White" VerticalOptions="StartAndExpand" 
-                                    HorizontalOptions="FillAndExpand">
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <BoxView BackgroundColor="Blue" WidthRequest="3" HorizontalOptions="Start"
-                                     VerticalOptions="FillAndExpand"/>
-
-                                <Grid HorizontalOptions="FillAndExpand" Margin="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <StackLayout Grid.Column="1" Spacing="0">
-                                                    <Label TextColor="#2F3246" FontSize="9">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <FormattedString.Spans>
-                                                        <Span FontSize="13" Text="{Binding DetordCantidad}" FontAttributes="Bold"/>
-                                                                    <Span FontSize="10" Text=" - " FontAttributes="Bold"/>
-                                                        <Span FontSize="13" Text="{Binding DetordIdproductoNavigation.ProdNombre}" FontAttributes="Bold"/>
-                                                                </FormattedString.Spans>
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                        </Label>
-                                        <!--<Label Text="{Binding OrdTotalcompra}" TextColor="Black" FontSize="18"/>-->
-                                    </StackLayout>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pv:PancakeView HeightRequest="50" HasShadow="True" BackgroundColor="White" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                                <Grid >
+                                    <BoxView BackgroundColor="Blue" WidthRequest="3" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                    <Grid HorizontalOptions="FillAndExpand" Margin="10">
+                                        <StackLayout  Spacing="0">
+                                            <Label TextColor="#2F3246" FontSize="9">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <FormattedString.Spans>
+                                                            <Span FontSize="13" Text="{Binding DetordCantidad}" FontAttributes="Bold"/>
+                                                            <Span FontSize="10" Text=" - " FontAttributes="Bold"/>
+                                                            <Span FontSize="13" Text="{Binding DetordIdproductoNavigation.ProdNombre}" FontAttributes="Bold"/>
+                                                        </FormattedString.Spans>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </Grid>
                                 </Grid>
-                                <!--</Expander>-->
-                            </Grid>
-                        </pv:PancakeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
+                            </pv:PancakeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
+                <StackLayout Grid.Row="3" Margin="60,0,60,0" Padding="0,0,0,20">
+                    <pv:PancakeView Padding="20,10" BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <StackLayout Spacing="20" Orientation="Horizontal">
+                            <Image Source="edit.png" WidthRequest="13"/>
+                            <Label Text="Mapa" TextColor="White" FontSize="14" VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <pv:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MapaOrdenesCommand}"/>
+                        </pv:PancakeView.GestureRecognizers>
+                    </pv:PancakeView>
+
+                    <pv:PancakeView Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <StackLayout Spacing="20" Orientation="Horizontal">
+                            <Image Source="edit.png" WidthRequest="13"/>
+                            <Label Text="Despachar" TextColor="White" FontSize="14" VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <pv:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DespacharOrdenesCommand}"/>
+                        </pv:PancakeView.GestureRecognizers>
+                    </pv:PancakeView>
+
+                    <pv:PancakeView Padding="20,10"  BackgroundColor="{StaticResource fondo_boton}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <StackLayout Spacing="20" Orientation="Horizontal">
+                            <Image Source="edit.png" WidthRequest="13"/>
+                            <Label Text="Avandonar" TextColor="White" FontSize="14" VerticalOptions="Center">
+                            </Label>
+                        </StackLayout>
+                        <pv:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AvandonarOrdenesCommand}"/>
+                        </pv:PancakeView.GestureRecognizers>
+                    </pv:PancakeView>
+
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

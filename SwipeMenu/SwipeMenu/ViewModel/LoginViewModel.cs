@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Views;
+using MvvmHelpers;
 using SwipeMenu.Service;
+using SwipeMenu.Views;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,7 +11,7 @@ using XFFurniture.Service;
 
 namespace SwipeMenu.ViewModel
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
         private string _username;
         private string _password;
@@ -17,19 +19,12 @@ namespace SwipeMenu.ViewModel
 
         public LoginViewModel()
         {
-            AuthenticateCommand = new Command(async () =>
-            {
-                IsBusy = true;
-                AreCredentialsInvalid = !await UserAuthenticated(Username, Password);
-                if (AreCredentialsInvalid) return;
-                Username = string.Empty;
-                Password = string.Empty;
-                await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
-                IsBusy = false;
-            });
+
             //IsBusy = true;
             AreCredentialsInvalid = false;
         }
+
+        public ICommand PaginaRegistrarCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushModalAsync(new RegistroUsuarioPage()); });
 
         private async Task<bool> UserAuthenticated(string username, string password)
         {
@@ -45,23 +40,21 @@ namespace SwipeMenu.ViewModel
                 UsuarioServicio.Tienda = res;
 
             }
-            return res!=null;
-            //return username.ToLowerInvariant() == "joe"
-            //    && password.ToLowerInvariant() == "secret";
+            return res != null;
         }
 
         private bool isBusin;
 
-        public bool IsBusy
-        {
-            get => isBusin;
-            set
-            {
-                if (value == isBusin) return;
-                isBusin = value;
-                OnPropertyChanged(nameof(Username));
-            }
-        }
+        //public new bool IsBusy
+        //{
+        //    get => isBusin;
+        //    set 
+        //    {
+        //        if (value == isBusin) return;
+        //        isBusin = value;
+        //        SetProperty(ref _username, Username);
+        //    }
+        //}
 
 
         public string Username
@@ -72,7 +65,7 @@ namespace SwipeMenu.ViewModel
                 if (value == _username) return;
                 _username = value;
                 AreCredentialsInvalid = false;
-                OnPropertyChanged(nameof(Username));
+                SetProperty(ref _username, value);
             }
         }
 
@@ -85,11 +78,22 @@ namespace SwipeMenu.ViewModel
                 if (value == _password) return;
                 _password = value;
                 AreCredentialsInvalid = false;
-                OnPropertyChanged(nameof(Password));
+                SetProperty(ref _password, value);
             }
         }
 
-        public ICommand AuthenticateCommand { get; set; }
+        public ICommand AuthenticateCommand => new Command(execute: async () =>
+            {
+                IsBusy = true;
+                AreCredentialsInvalid = !await UserAuthenticated(Username, Password);
+                if (AreCredentialsInvalid) return;
+                _username = string.Empty;
+                _password = string.Empty;
+                Username = string.Empty;
+                Password = string.Empty;
+                await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                IsBusy = false;
+            });
 
         public bool AreCredentialsInvalid
         {
@@ -98,15 +102,8 @@ namespace SwipeMenu.ViewModel
             {
                 if (value == _areCredentialsInvalid) return;
                 _areCredentialsInvalid = value;
-                OnPropertyChanged(nameof(AreCredentialsInvalid));
+                SetProperty(ref _areCredentialsInvalid, value);
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
