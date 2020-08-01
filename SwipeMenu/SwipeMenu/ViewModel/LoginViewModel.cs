@@ -19,12 +19,11 @@ namespace SwipeMenu.ViewModel
 
         public LoginViewModel()
         {
-
             //IsBusy = true;
             AreCredentialsInvalid = false;
         }
 
-        public ICommand PaginaRegistrarCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushModalAsync(new RegistroUsuarioPage()); });
+        public ICommand PaginaRegistrarCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushModalAsync(new MisDatosPage()); });
 
         private async Task<bool> UserAuthenticated(string username, string password)
         {
@@ -55,8 +54,6 @@ namespace SwipeMenu.ViewModel
         //        SetProperty(ref _username, Username);
         //    }
         //}
-
-
         public string Username
         {
             get => _username;
@@ -68,7 +65,6 @@ namespace SwipeMenu.ViewModel
                 SetProperty(ref _username, value);
             }
         }
-
         public string Password
         {
             get => _password;

@@ -58,18 +58,26 @@ namespace SwipeMenu.ViewModel
                 new Menu{ Name = "My Tasks", Icon = "tasks.png"},
             };
         }
-        public ICommand ProductoCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new ProductoPage()); });
-        public ICommand MapaCommand => new Command(async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
-        public ICommand MapaOrdenesCommand => new Command( async () =>
+        public ICommand ProductoCommand => new Command(execute: async () => { IsBusy = true; await Application.Current.MainPage.Navigation.PushAsync(new ProductoPage()); IsBusy = false; });
+        public ICommand MisDatosCommand => new Command(execute: async () => { IsBusy = true; await Application.Current.MainPage.Navigation.PushAsync(new MisDatosPage()); IsBusy = false; });
+        public ICommand MapaCommand => new Command(async () =>
         {
-            var s = OrdenSelect;
-            await Application.Current.MainPage.Navigation.PushModalAsync(new PinPage
-            {
-                BindingContext = this
-            });
+            await GetOrdenesAsync();
+            await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this });
         });
-        public ICommand DespacharOrdenesCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
-        public ICommand AvandonarOrdenesCommand => new Command(execute: async () => { await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); });
+        public ICommand MapaOrdenesCommand => new Command(async () =>
+       {
+           IsBusy = true;
+           //var s = OrdenSelect;
+           await Application.Current.MainPage.Navigation.PushModalAsync(new PinPage
+           {
+               BindingContext = this
+           });
+           IsBusy = false;
+       });
+
+        public ICommand DespacharOrdenesCommand => new Command(execute: async () => { IsBusy = true; await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); IsBusy = false; });
+        public ICommand AvandonarOrdenesCommand => new Command(execute: async () => { IsBusy = true; await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); IsBusy = false; });
         public ICommand OrdenesCommand => new Xamarin.Forms.Command(async () =>
         {
             try
@@ -78,9 +86,9 @@ namespace SwipeMenu.ViewModel
                 if (Ordenes.Count < 1)
                 {
                     await Application.Current.MainPage.DisplayAlert("", "No hay pedidos", "OK");
+                    IsBusy = false;
                     return;
                 }
-
                 await Application.Current.MainPage.Navigation.PushModalAsync(new OrdenesPage { BindingContext = this });
             }
             catch (System.Exception ex)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XFFurniture.Models
 {
-  public  class TiendaModelo
+  public  class TiendaModelo: MvvmHelpers.BaseViewModel
     {
 
         public int TienId { get; set; }
@@ -20,6 +20,17 @@ namespace XFFurniture.Models
         public string TienLatitud { get; set; }
         public string TienLongitud { get; set; }
         public string TienAltura { get; set; }
+        private Boolean isUbicacion = true;
+
+        public Boolean IsUbicacion
+        {
+            get => isUbicacion;
+            set  {
+                if (TienLatitud != null && TienLongitud != null)
+                    isUbicacion = true;
+                SetProperty(ref isUbicacion, value);
+            }
+        }
 
         public virtual ICollection<Ordendetalle> Ordenes { get; set; }
     }

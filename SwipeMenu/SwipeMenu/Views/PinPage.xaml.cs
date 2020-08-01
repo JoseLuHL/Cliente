@@ -18,17 +18,21 @@ namespace WorkingWithMaps
         public PinPage()
         {
             InitializeComponent();
-            map.IsShowingUser = true;
+            map.MapType = MapType.Hybrid;
+            
+            //Pin wharfpin = new Pin
+            //{
+            //    Position = new Position(5.6870677, -76.6395542),
+            //    Label = "chocó",
+            //    Address = "quibdo",
+            //    Type = PinType.Place
+            //};
+            //wharfpin.InfoWindowClicked += OnInfoWindowClickedAsync;
+            //map.Pins.Add(wharfpin);
 
         }
 
-        public PinPage(Property property)
-        {
-            InitializeComponent();
-            map.IsShowingUser = false;
-            this.property = property;
 
-        }
 
         protected override void OnAppearing()
         {
@@ -38,6 +42,7 @@ namespace WorkingWithMaps
 
         public void Cargar()
         {
+            
             Pin boardwalkPin = new Pin();
             Pin listPin = new Pin();
             var s = Ordens.OrdenSelect;
@@ -59,8 +64,8 @@ namespace WorkingWithMaps
             }
 
 
-
-            if (Ordens != null)
+            var g = Ordens.Ordenes;
+            if (Ordens.Ordenes != null)
                 foreach (var item in Ordens.Ordenes)
                 {
                     listPin = new Pin
@@ -79,14 +84,10 @@ namespace WorkingWithMaps
                 }
 
             //boardwalkpin.markerclicked += onmarkerclickedasync;
-            //pin wharfpin = new pin
-            //{
-            //    position = new position(5.6845709, -76.6540463),
-            //    label = "chocó",
-            //    address = "quibdo",
-            //    type = pintype.place
-            //};
-            //map.pins.add(wharfpin);
+            //Pin listPin = new Pin();
+
+
+
         }
         void OnButtonClicked(object sender, EventArgs e)
         {

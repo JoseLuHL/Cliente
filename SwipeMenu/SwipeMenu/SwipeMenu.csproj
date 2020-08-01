@@ -30,6 +30,9 @@
     <EmbeddedResource Update="Views\LoginPagina.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\MisDatosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\OrdenesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

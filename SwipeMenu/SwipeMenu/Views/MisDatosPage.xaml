@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vn="clr-namespace:SwipeMenu.ViewModel"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="SwipeMenu.Views.MisDatosPage">
+    <ContentPage.BindingContext>
+        <vn:MisDatosViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView Padding="0,0,0,20">
+        <StackLayout Margin="50" Spacing="0">
+            <Label Text="Razon social"/>
+            <Entry Text="{Binding Tienda.TienRazonsocial}" />
+
+            <Label Text="Tipo de identificación"/>
+            <Entry Text="{Binding Tienda.TienTipoidentificacion}" />
+
+            <Label Text="Razon social"/>
+            <Entry Text="{Binding Tienda.TienNit}" />
+
+            <Label Text="Clave"/>
+            <Entry Text="{Binding Tienda.TienClave}" />
+
+            <Label Text="Razon Telefono"/>
+            <Entry Text="{Binding Tienda.TienTelefono}" />
+
+            <Label Text="Dirección"/>
+            <Entry Text="{Binding Tienda.TienDireccion}" />
+            
+            <Label Text=""/>
+            <Button Command="{Binding UbicacionCommand}" TextColor="White" VerticalOptions="Start" HorizontalOptions="Start" Text="Ubicación GPS" BackgroundColor="{StaticResource fondo_boton}"/>
+            <!--<CheckBox  x:Name="miubicacion" IsChecked="{Binding IsUbicacion}" />-->
+            <Label Text="{Binding MensajeUbicacion}" TextColor="{Binding ColorUbicacion}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+            <Label Text="Latitud"/>
+            <Entry Text="{Binding Tienda.TienLatitud}" />
+
+            <Label Text="Longitud"/>
+            <Entry Text="{Binding Tienda.TienLongitud}" />
+
+            <Label Text="Barrio"/>
+            <Entry Text="{Binding Tienda.TienBarrio}" />
+
+            <Label Text="Correo"/>
+            <Entry Text="{Binding Tienda.TienCorreo}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

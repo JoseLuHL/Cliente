@@ -55,11 +55,14 @@
                         <Image Source="upload.png" WidthRequest="13"/>
                         <Label Text="Mis datos" TextColor="White" FontSize="14" VerticalOptions="Center"/>
                     </StackLayout>
+                    <pv:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MisDatosCommand}"/>
+                    </pv:PancakeView.GestureRecognizers>
                 </pv:PancakeView>
                 <ActivityIndicator IsRunning="{Binding IsBusy}"></ActivityIndicator>
             </StackLayout>
             <StackLayout Grid.Row="3" Padding="50,0">
-                <Label Text="My Tasks" TextColor="Black" FontSize="15" FontAttributes="Bold" />
+                <Label Text="Mis pedidos" TextColor="Black" FontSize="15" FontAttributes="Bold" />
                 <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -73,7 +76,7 @@
                             </Grid.RowDefinitions>
                             <StackLayout Orientation="Horizontal" Spacing="10">
                                 <Image Source="checkmark.png" HeightRequest="12"/>
-                                <Label Text="Completed" TextColor="#8AB0FB" FontSize="12" VerticalOptions="Center"/>
+                                <Label Text="Completados" TextColor="#8AB0FB" FontSize="12" VerticalOptions="Center"/>
                             </StackLayout>
                             <Label Grid.Row="1" Text="25" TextColor="Black" FontSize="25" VerticalOptions="End"/>
                         </Grid>
@@ -86,7 +89,7 @@
                             </Grid.RowDefinitions>
                             <StackLayout Orientation="Horizontal" Spacing="10">
                                 <Image Source="timelapse.png" HeightRequest="12"/>
-                                <Label Text="In Pregress" TextColor="#8AB0FB" FontSize="12" VerticalOptions="Center"/>
+                                <Label Text="En progreso" TextColor="#8AB0FB" FontSize="12" VerticalOptions="Center"/>
                             </StackLayout>
                             <Label Grid.Row="1" Text="8" TextColor="Black" FontSize="25" VerticalOptions="End"/>
                         </Grid>
