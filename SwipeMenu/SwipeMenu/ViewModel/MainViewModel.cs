@@ -24,8 +24,8 @@ namespace SwipeMenu.ViewModel
 
         public ObservableCollection<Menu> MyMenu => GetMenus();
         //public OrdenModelo OrdenSelect { get; set; }
-        private OrdenModelo ordenSelect;
 
+        private OrdenModelo ordenSelect;
         public OrdenModelo OrdenSelect
         {
             get => ordenSelect;
@@ -75,7 +75,6 @@ namespace SwipeMenu.ViewModel
            });
            IsBusy = false;
        });
-
         public ICommand DespacharOrdenesCommand => new Command(execute: async () => { IsBusy = true; await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); IsBusy = false; });
         public ICommand AvandonarOrdenesCommand => new Command(execute: async () => { IsBusy = true; await Application.Current.MainPage.Navigation.PushAsync(new PinPage { BindingContext = this }); IsBusy = false; });
         public ICommand OrdenesCommand => new Xamarin.Forms.Command(async () =>
