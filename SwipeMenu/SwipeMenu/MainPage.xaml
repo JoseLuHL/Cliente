@@ -54,7 +54,7 @@
                     <StackLayout Spacing="20" Orientation="Horizontal">
                         <Image Source="upload.png" WidthRequest="13"/>
                         <Label Text="Mis datos" TextColor="White" FontSize="14" VerticalOptions="Center"/>
-                    </StackLayout>
+                    </StackLayout> 
                     <pv:PancakeView.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding MisDatosCommand}"/>
                     </pv:PancakeView.GestureRecognizers>
